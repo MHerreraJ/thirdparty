@@ -1,0 +1,20 @@
+oss-build-$(OSS_CONFIG_OPENSSL)+=openssl
+openssl.depend:=$(OSS_CONFIG_OPENSSL_VERSION)
+
+OPENSSL_OSS_BUILD:=$(call build_oss,openssl)
+OPENSSL_OSS_INSTALL:=$(call install_oss,openssl)
+OPENSSL_OSS_CLEAN=$(call clean_oss,openssl)
+OPENSSL_OSS_DISTCLEAN=$(call distclean_oss,openssl)
+
+.PHONY: $(OPENSSL_OSS_BUILD) $(OPENSSL_OSS_CLEAN) $(OPENSSL_OSS_DISTCLEAN) $(OPENSSL_OSS_INSTALL)
+
+
+$(OPENSSL_OSS_BUILD):$(OSS_CONFIG_OPENSSL_VERSION)
+	@rm -f $(STAGE_DIR)
+	@[ ! -e $(STAGE_DIR) ] &&  ln -sf $(call get_dep_dir,$(OSS_CONFIG_OPENSSL_VERSION)) $(STAGE_DIR) || true
+
+$(OPENSSL_OSS_INSTALL):$(OSS_CONFIG_OPENSSL_VERSION).install
+
+$(OPENSSL_OSS_CLEAN):$(OSS_CONFIG_OPENSSL_VERSION).clean
+
+$(OPENSSL_OSS_DISTCLEAN):$(OSS_CONFIG_OPENSSL_VERSION).distclean

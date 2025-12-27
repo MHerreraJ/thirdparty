@@ -1,0 +1,28 @@
+# Third Party Dependencies
+
+This directory contains third-party libraries and dependencies used by various projects.
+
+## Purpose
+
+Used to manage external libraries that are not part of the core codebase. This helps keep dependencies organized and makes it easier to track versions and licenses.
+
+The next folders are created at runtime
+- **fetch**: Contains downloaded external codebases (generated at build time)
+- **stage**: Contains the fakeroot for each individual component (generated at build time)
+
+## Adding New Components
+
+When adding a new component
+
+1. Create a .mk file inside the recipes folder \<component>.mk
+2. Add this line at the top of the file oss-build-$(OSS_CONFIG_\<COMPONENT>)+=\<component>. This will tell if this recipe is executed depending on configuration
+3. Define the component dependencies (if needed): \<component>.depend:=\<component_a>,\<component_b>...
+4. Define the next recipes
+    - $(call build_oss,\<component>) Recipe for building the component and copying to 'stage' dir
+    - $(call clean_oss,\<component>) Recipe for cleaning the building process
+    - $(call distclean_oss,\<copmonent>) Recipe for hard cleaning the files created by the build recipe
+
+
+## Usage
+Create a .config configuration file defining the components to be built OSS_CONFIG_<\COMPONENT>=y
+make

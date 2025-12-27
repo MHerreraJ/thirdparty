@@ -1,0 +1,44 @@
+oss-build-$(OSS_CONFIG_SQLITE) += sqlite
+
+SQLITE_RELEASE_URL=https://www.sqlite.org/2025
+SQLITE_VERSION:=sqlite3.48.0
+
+SQLITE_ASSET_BASE_NAME=sqlite-src-3480000
+SQLITE_ASSET_NAME=$(SQLITE_ASSET_BASE_NAME).zip
+SQLITE_ASSET=$(FETCH_DIR)/$(SQLITE_ASSET_NAME)
+SQLITE_ASSET_URL:=$(SQLITE_RELEASE_URL)/$(SQLITE_ASSET_NAME)
+
+SQLITE_DIR=$(FETCH_DIR)/$(SQLITE_VERSION)
+
+sqlite.depend:=
+
+SQLITE_OSS_BUILD:=$(call build_oss,sqlite)
+SQLITE_OSS_CLEAN:=$(call clean_oss,sqlite)
+SQLITE_OSS_DISTCLEAN:=$(call distclean_oss,sqlite)
+.PHONY: $(SQLITE_OSS_BUILD) $(SQLITE_OSS_CLEAN) $(SQLITE_OSS_DISTCLEAN)
+
+$(SQLITE_OSS_BUILD): $(SQLITE_DIR)
+	@mkdir -p $(STAGE_DIR)
+	cd $(SQLITE_DIR) && ./configure \
+ 		--prefix=$(STAGE_DIR) \
+ 		--host=$(HOST) 
+	@$(MAKE) -C $(SQLITE_DIR)
+	@$(MAKE) -C $(SQLITE_DIR) install
+
+$(SQLITE_DIR): $(SQLITE_ASSET)
+	@echo "Extracting $(SQLITE_ASSET)"
+	@unzip -q -d $(FETCH_DIR)/ $(SQLITE_ASSET)
+	@mv $(FETCH_DIR)/$(SQLITE_ASSET_BASE_NAME) $(SQLITE_DIR)
+
+$(SQLITE_ASSET):
+	@rm -f $(SQLITE_ASSET)
+	@echo "Fetching $(SQLITE_ASSET)..."
+	@wget --quiet --show-progress $(SQLITE_ASSET_URL) -O $(SQLITE_ASSET)
+
+
+$(SQLITE_OSS_CLEAN):
+	@rm -rf $(SQLITE_DIR)
+
+$(SQLITE_OSS_DISTCLEAN): $(SQLITE_OSS_CLEAN)
+	@rm -rf $(SQLITE_ASSET)
+

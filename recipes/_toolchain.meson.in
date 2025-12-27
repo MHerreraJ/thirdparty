@@ -1,0 +1,18 @@
+[host_machine]
+system = 'linux'
+cpu_family = '@ARCH@'
+cpu = '@ARCH@'
+endian = 'little'
+
+[built-in options]
+c_args = []
+c_link_args = []
+
+[binaries]
+c = '@CROSS_COMPILE@gcc'
+cpp = '@CROSS_COMPILE@g++'
+ar = '@CROSS_COMPILE@ar'
+ld = '@CROSS_COMPILE@ld'
+objcopy = '@CROSS_COMPILE@objcopy'
+strip = '@CROSS_COMPILE@strip'
+pkg-config = 'pkg-config'
