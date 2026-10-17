@@ -25,7 +25,7 @@ CMAKE_OSS_DISTCLEAN:=$(call distclean_oss,cmake)
 
 $(CMAKE_OSS_BUILD): $(CMAKE_DIR)
 	@mkdir -p $(STAGE_DIR)
-	cd $(CMAKE_DIR) && CHOST=$(CROSS_COMPILE:-=) CFLAGS="-fPIC" \
+	+cd $(CMAKE_DIR) && CHOST=$(CROSS_COMPILE:-=) CFLAGS="-fPIC" \
 		./configure \
 			--prefix=$(STAGE_DIR) \
 			--no-system-libs \
@@ -34,7 +34,7 @@ $(CMAKE_OSS_BUILD): $(CMAKE_DIR)
 			$(CMAKE_BUILD_VERBOSE) \
 			CC="$(CROSS_COMPILE)gcc" \
 			CXX="$(CROSS_COMPILE)g++" 
-	@$(MAKE) -C $(CMAKE_DIR) 
+	@$(MAKE) -C $(CMAKE_DIR)
 	@$(MAKE) -C $(CMAKE_DIR) install
 
 $(CMAKE_DIR): $(CMAKE_ASSET)
