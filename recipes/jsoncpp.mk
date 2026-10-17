@@ -1,6 +1,4 @@
 
-oss-build-$(OSS_CONFIG_JSONCPP) += jsoncpp
-# https://github.com/open-source-parsers/jsoncpp/archive/refs/tags/1.9.8.tar.gz
 JSONCPP_RELEASES_URL=https://github.com/open-source-parsers/jsoncpp/archive/refs/tags
 JSONCPP_VERSION:=1.9.8
 

@@ -1,4 +1,3 @@
-oss-build-$(OSS_CONFIG_BOOST) += boost
 BOOST_VERSION:=1.92.0
 BOOST_RELEASE_URL=https://archives.boost.io/release/$(BOOST_VERSION)/source
 

@@ -1,5 +1,3 @@
-
-oss-build-$(OSS_CONFIG_OATPP_SQLITE) += oatpp_sqlite
 OATPP_SQLITE_RELEASES_URL=https://github.com/oatpp/oatpp-sqlite/archive/refs/tags
 OATPP_SQLITE_VERSION:=1.3.0
 
@@ -10,11 +8,11 @@ OATPP_SQLITE_ASSET_URL:=$(OATPP_SQLITE_RELEASES_URL)/$(OATPP_SQLITE_ASSET_NAME)
 OATPP_SQLITE_DIR:=$(FETCH_DIR)/oatpp-sqlite-$(OATPP_SQLITE_VERSION)
 
 
-oatpp_sqlite.depend:=$(call get_host_dep,cmake) oatpp sqlite
+oatpp-sqlite.depend:=$(call get_host_dep,cmake) oatpp sqlite
 
-OATPP_SQLITE_OSS_BUILD:=$(call build_oss,oatpp_sqlite)
-OATPP_SQLITE_OSS_CLEAN:=$(call clean_oss,oatpp_sqlite)
-OATPP_SQLITE_OSS_DISTCLEAN:=$(call distclean_oss,oatpp_sqlite)
+OATPP_SQLITE_OSS_BUILD:=$(call build_oss,oatpp-sqlite)
+OATPP_SQLITE_OSS_CLEAN:=$(call clean_oss,oatpp-sqlite)
+OATPP_SQLITE_OSS_DISTCLEAN:=$(call distclean_oss,oatpp-sqlite)
 
 HOST_CMAKE=$(call get_host_dep_dir,cmake)/bin/cmake
 
@@ -24,7 +22,7 @@ $(OATPP_SQLITE_OSS_BUILD): $(OATPP_SQLITE_DIR)
 	@mkdir -p $(OATPP_SQLITE_DIR)/built
 	@mkdir -p $(STAGE_DIR)
 	cd $(OATPP_SQLITE_DIR)/built && \
-		PKG_CONFIG_PATH="$(call get_deps_pkgconfig,$(oatpp_sqlite.depend))" \
+		PKG_CONFIG_PATH="$(call get_deps_pkgconfig,$(oatpp-sqlite.depend))" \
 		$(HOST_CMAKE) $(OATPP_SQLITE_DIR) \
 			-DCMAKE_INSTALL_PREFIX=$(STAGE_DIR) \
 			-DCMAKE_PREFIX_PATH=$(OSS_STAGE_DIR)/oatpp \

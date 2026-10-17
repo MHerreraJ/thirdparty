@@ -1,5 +1,3 @@
-oss-build-$(OSS_CONFIG_SQLITE) += sqlite
-
 SQLITE_RELEASE_URL=https://www.sqlite.org/2025
 SQLITE_VERSION:=sqlite3.48.0
 

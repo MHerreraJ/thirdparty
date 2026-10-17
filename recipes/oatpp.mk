@@ -1,5 +1,3 @@
-
-oss-build-$(OSS_CONFIG_OATPP) += oatpp
 OATPP_RELEASES_URL=https://github.com/oatpp/oatpp/archive/refs/tags
 OATPP_VERSION:=1.3.1
 

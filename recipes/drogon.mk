@@ -1,4 +1,3 @@
-oss-build-$(OSS_CONFIG_DROGON) += drogon
 DROGON_URL=https://github.com/drogonframework/drogon.git
 DROGON_VERSION:=1.9.14
 

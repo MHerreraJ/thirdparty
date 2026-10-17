@@ -1,5 +1,3 @@
-oss-build-$(OSS_CONFIG_CURL) += curl
-
 CURL_RELEASES_URL=https://github.com/curl/curl/releases/download
 CURL_VERSION:=curl-8_7_1
 

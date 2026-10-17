@@ -1,5 +1,3 @@
-oss-build-$(OSS_CONFIG_MOSQUITTO) += mosquitto
-
 MOSQUITTO_RELEASES_URL=https://mosquitto.org/files/source
 MOSQUITTO_VERSION:=2.0.22
 

@@ -1,5 +1,3 @@
-oss-build-$(OSS_CONFIG_POCO) += poco
-
 POCO_RELEASES_URL=https://github.com/pocoproject/poco/archive/refs/tags
 POCO_VERSION:=1.14.1
 

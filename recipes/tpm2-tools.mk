@@ -1,5 +1,3 @@
-oss-build-$(OSS_CONFIG_TPM2_TOOLS) += tpm2-tools
-
 TPM2_TOOLS_RELEASES_URL=https://github.com/tpm2-software/tpm2-tools/releases/download
 TPM2_TOOLS_VERSION:=5.6
 

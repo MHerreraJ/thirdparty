@@ -1,4 +1,3 @@
-oss-build-$(OSS_CONFIG_ZLIB) += zlib
 ZLIB_RELEASES_URL=https://www.zlib.net
 ZLIB_VERSION:=1.3.1
 

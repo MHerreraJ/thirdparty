@@ -1,4 +1,3 @@
-oss-build-$(OSS_CONFIG_BROTLI) += brotli
 BROTLI_RELEASES_URL=https://github.com/google/brotli/archive/refs/tags/
 BROTLI_VERSION:=1.2.0
 

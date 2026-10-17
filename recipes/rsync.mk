@@ -1,5 +1,3 @@
-oss-build-$(OSS_CONFIG_RSYNC) += rsync
-
 RSYNC_RELEASES_URL=https://github.com/RsyncProject/rsync/releases/download/
 RSYNC_VERSION:=v3.4.1
 

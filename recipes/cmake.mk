@@ -1,5 +1,3 @@
-oss-build-$(OSS_CONFIG_CMAKE) += cmake
-
 CMAKE_RELEASES_URL=https://github.com/Kitware/CMake/releases/download
 CMAKE_VERSION:=v3.31.5
 

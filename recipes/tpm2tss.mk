@@ -1,4 +1,3 @@
-oss-build-$(OSS_CONFIG_TPM2TSS) += tpm2tss
 TPM2TSS_RELEASES_URL=https://github.com/tpm2-software/tpm2-tss/releases/download
 TPM2TSS_VERSION:=4.0.1
 

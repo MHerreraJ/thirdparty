@@ -1,6 +1,3 @@
-
-oss-build-$(OSS_CONFIG_CROW) += crow
-
 CROW_RELEASES_URL=https://github.com/CrowCpp/Crow/archive/refs/tags
 CROW_VERSION:=1.3.5
 

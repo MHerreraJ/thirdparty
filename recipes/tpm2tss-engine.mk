@@ -1,7 +1,3 @@
-oss-build-$(OSS_CONFIG_TPM2TSS_ENGINE) += tpm2tss-engine
-
-#https://github.com/tpm2-software/tpm2-tss-engine/archive/refs/tags/1.2.0.tar.gz
-
 TPM2TSS_ENGINE_RELEASES_URL=https://github.com/tpm2-software/tpm2-tss-engine/archive/refs/tags
 TPM2TSS_ENGINE_VERSION:=v1.2.0
 

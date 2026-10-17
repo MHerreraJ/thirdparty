@@ -1,4 +1,3 @@
-oss-build-$(OSS_CONFIG_SWTPM) += swtpm
 SWTPM_RELEASES_URL=https://github.com/stefanberger/swtpm/archive/refs/tags/
 SWTPM_VERSION:=0.8.2
 

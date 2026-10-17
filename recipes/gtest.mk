@@ -1,5 +1,3 @@
-oss-build-$(OSS_CONFIG_GTEST) += gtest
-
 GTEST_RELEASES_URL=https://github.com/google/googletest/archive/refs/tags
 GTEST_VERSION:=1.12.0
 

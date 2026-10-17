@@ -1,5 +1,3 @@
-oss-build-$(OSS_CONFIG_OPENSSL3) += openssl3
-
 OPENSSL3_RELEASES_URL=https://github.com/openssl/openssl/releases/download
 OPENSSL3_VERSION:=openssl-3.0.13
 

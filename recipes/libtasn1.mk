@@ -1,4 +1,3 @@
-oss-build-$(OSS_CONFIG_LIBTASN1) += libtasn1
 LIBTASN1_RELEASES_URL=https://mirrors.ocf.berkeley.edu/gnu/libtasn1/
 LIBTASN1_VERSION:=4.19.0
 

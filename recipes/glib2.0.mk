@@ -1,4 +1,3 @@
-oss-build-$(OSS_CONFIG_GLIB2_0) += glib2.0
 GLIB2_0_RELEASES_URL=https://download.gnome.org/sources/glib/2.80
 GLIB2_0_VERSION:=2.80.0
 

@@ -1,5 +1,3 @@
-oss-build-$(OSS_CONFIG_LIBSSH2) += libssh2
-
 LIBSSH2_RELEASE_URL=https://libssh2.org/download/
 LIBSSH2_VERSION:=libssh2-1.11.1
 

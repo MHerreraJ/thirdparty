@@ -1,4 +1,3 @@
-oss-build-$(OSS_CONFIG_ASIO) += asio
 ASIO_VERSION:=1.38.2
 ASIO_RELEASE_URL=https://sourceforge.net/projects/asio/files/asio/$(ASIO_VERSION)%20%28Stable%29/
 

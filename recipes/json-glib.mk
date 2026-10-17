@@ -1,4 +1,3 @@
-oss-build-$(OSS_CONFIG_JSON_GLIB) += json-glib
 JSON_GLIB_RELEASES_URL=https://download.gnome.org/sources/json-glib/1.6
 JSON_GLIB_VERSION:=1.6.6
 

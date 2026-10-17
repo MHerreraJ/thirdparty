@@ -2,28 +2,32 @@ export OSS_TOP_DIR:=$(shell pwd)
 
 # Opensource build
 oss-build-y:=
+oss-components:=$(patsubst recipes/%.mk,%,$(wildcard recipes/*.mk))
 
-ifeq ($(CONFIG),)
-# If not .config file found, use default simulator_config
-ifeq ($(wildcard $(OSS_TOP_DIR)/.config),)
-$(error No .config file found in '$(OSS_TOP_DIR)/.config'. Please provide one or set CONFIG variable)
-endif
-else
-# If CONFIG variable is set, use it if exists
-# First test if file exist in local directory
-ifneq ($(wildcard $(CONFIG)),)
-$(shell cp -af $(CONFIG) $(OSS_TOP_DIR)/.config)
-else
-# If not, test if file exist in configs directory
-ifeq ($(wildcard $(OSS_TOP_DIR)/configs/$(CONFIG)),)
-$(error CONFIG file '$(OSS_TOP_DIR)/configs/$(CONFIG)' not found)
-else
-$(shell cp -af $(OSS_TOP_DIR)/configs/$(CONFIG) $(OSS_TOP_DIR)/.config)
-endif
-endif
-endif
+# ifeq ($(CONFIG),)
+# # If not .config file found, use default simulator_config
+# ifeq ($(wildcard $(OSS_TOP_DIR)/.config),)
+# $(error No .config file found in '$(OSS_TOP_DIR)/.config'. Please provide one or set CONFIG variable)
+# endif
+# else
+# # If CONFIG variable is set, use it if exists
+# # First test if file exist in local directory
+# ifneq ($(wildcard $(CONFIG)),)
+# $(shell cp -af $(CONFIG) $(OSS_TOP_DIR)/.config)
+# else
+# # If not, test if file exist in configs directory
+# ifeq ($(wildcard $(OSS_TOP_DIR)/configs/$(CONFIG)),)
+# $(error CONFIG file '$(OSS_TOP_DIR)/configs/$(CONFIG)' not found)
+# else
+# $(shell cp -af $(OSS_TOP_DIR)/configs/$(CONFIG) $(OSS_TOP_DIR)/.config)
+# endif
+# endif
+# endif
 
-include $(OSS_TOP_DIR)/.config
+# include $(OSS_TOP_DIR)/.config
+ifneq ($(CONFIG),)
+include $(CONFIG)
+endif
 
 export SYS_ARCH:=$(shell uname -m)
 
@@ -80,10 +84,8 @@ export OSS_STAGE_BASE_DIR:=$(OSS_TOP_DIR)/stage
 export OSS_STAGE_DIR:=$(OSS_STAGE_BASE_DIR)/$(ARCH)
 export OSS_CFG_DIR:=$(OSS_TOP_DIR)/config
 
-
 OSS_INSTALL_PREFIX?=$(OSS_TOP_DIR)/out/$(ARCH)
 include macros.mk
-
 
 
 define OSS_INSTALL_SCRIPT
@@ -173,11 +175,11 @@ $(MESON_CROSS_FILE):
 	@sed -i 's%@CROSS_COMPILE@%$(CROSS_COMPILE)%g' $(MESON_CROSS_FILE)
 
 
-.PHONY: $(oss-build-y)
+.PHONY: $(oss-components)
 ifeq ($(FORCE),1)
-$(oss-build-y): %: $(OSS_FETCH_DIR)/%_$(ARCH).built.force 
+$(oss-components): %: $(OSS_FETCH_DIR)/%_$(ARCH).built.force 
 else
-$(oss-build-y): %: $(OSS_FETCH_DIR)/%_$(ARCH).built
+$(oss-components): %: $(OSS_FETCH_DIR)/%_$(ARCH).built
 endif
 
 ifeq ($(FORCE),1)
@@ -214,8 +216,8 @@ endif
 
 	@touch $(OSS_FETCH_DIR)/$($@_oss)_$(ARCH).built
 
-.PHONY: $(patsubst %,%.install,$(oss-build-y))
-$(patsubst %,%.install,$(oss-build-y)): %.install: $(OSS_FETCH_DIR)/%_$(ARCH).built
+.PHONY: $(patsubst %,%.install,$(oss-components))
+$(patsubst %,%.install,$(oss-components)): %.install: $(OSS_FETCH_DIR)/%_$(ARCH).built
 	@printf "\nInstalling $*...\n"
 	@mkdir -p $(OSS_INSTALL_PREFIX)
 	$(eval $@_oss:=$(patsubst %.install,%,$@))
@@ -234,8 +236,8 @@ $(patsubst %,%.install,$(oss-build-y)): %.install: $(OSS_FETCH_DIR)/%_$(ARCH).bu
 	@$(call patch_pkg_configs,$($@_pkgconfigs),$(OSS_INSTALL_PREFIX),$(OSS_STAGE_DIR)/$($@_oss))
 
 
-.PHONY: $(patsubst %,%.clean,$(oss-build-y))
-$(patsubst %,%.clean,$(oss-build-y)): %.clean:
+.PHONY: $(patsubst %,%.clean,$(oss-components))
+$(patsubst %,%.clean,$(oss-components)): %.clean:
 	$(eval $@_oss:=$(patsubst %.clean,%,$@))
 	@printf "\033[1;32mCleaning '$($@_oss)'...\033[0m\n"
 	@rm -f $(OSS_FETCH_DIR)/$($@_oss)_$(ARCH).built
@@ -245,8 +247,8 @@ $(patsubst %,%.clean,$(oss-build-y)): %.clean:
 		( printf "\033[1;31mFailed to clean '$($@_oss))'\033[0m\n" && false )
 
 
-.PHONY: $(patsubst %,%.distclean,$(oss-build-y))
-$(patsubst %,%.distclean,$(oss-build-y)): %.distclean:
+.PHONY: $(patsubst %,%.distclean,$(oss-components))
+$(patsubst %,%.distclean,$(oss-components)): %.distclean:
 	$(eval $@_oss:=$(patsubst %.distclean,%,$@))
 	@printf "\033[1;32mDist cleaning '$($@_oss)'...\033[0m\n"
 	@rm -f $(OSS_FETCH_DIR)/$($@_oss)_$(ARCH).built

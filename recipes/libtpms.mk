@@ -1,4 +1,3 @@
-oss-build-$(OSS_CONFIG_LIBTPMS) += libtpms
 LIBTPMS_RELEASES_URL=https://github.com/stefanberger/libtpms/archive/refs/tags/
 LIBTPMS_VERSION:=0.9.6
 
